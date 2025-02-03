@@ -1,13 +1,8 @@
 // TIC-TAC-TOE SCRIPT //
 
-// gameObject
-// playerObject
-// gameboardObject
-
-// [][][]
-// [][][]
-// [][][]
-
+/////////////////////////////
+// GAMEBOARD - GAME LOGIC //
+///////////////////////////
 function Gameboard() {
     // Initializing empty board array and row/column values
     let rows = 3;
@@ -29,10 +24,15 @@ function Gameboard() {
     player2 = {name: "Player 2", marker: "O"};
     let currentPlayer = player1;
 
+    function getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     function switchTurns(){
         currentPlayer === player1 ?
         currentPlayer = player2 :
         currentPlayer = player1;
+        displayController.updateTurnDisplay();
     }
 
     // Checks for empty cell, then places marker in chosen cell
@@ -101,11 +101,16 @@ function Gameboard() {
     function restartGame() {
         game = Gameboard(); // Reset game
         displayController.renderBoard(game.board); // Refresh UI
+        document.getElementById("resultsModal").style.display = "none";
+        updateTurnDisplay();
     }
 
-    return {board, placeMarker, switchTurns, checkWin, restartGame};
+    return {board, placeMarker, switchTurns, checkWin, restartGame, getCurrentPlayer};
 }
 
+///////////////////////////////////
+// DISPLAYCONTROLLER - UI LOGIC //
+/////////////////////////////////
 const displayController = (function() {
     function renderBoard(board) {
         let gameboard = document.querySelector(".gameboard");
@@ -136,17 +141,22 @@ const displayController = (function() {
         if (tile) tile.textContent = marker; // Update the tile with "X" or "O"
     }
 
-    return { renderBoard, updateTile };
+    function updateTurnDisplay() {
+        document.getElementById("turnDisplay").textContent =
+            `${game.getCurrentPlayer().name}'s Turn (${game.getCurrentPlayer().marker})`;
+    }
+
+    return { renderBoard, updateTile, updateTurnDisplay };
 })();
 
 let game = Gameboard();
 
 document.addEventListener("DOMContentLoaded", () => {
     displayController.renderBoard(game.board);
+    displayController.updateTurnDisplay();
 
     document.getElementById("restartBtn").addEventListener("click", () => {
         game.restartGame();
-        document.getElementById("resultsModal").style.display = "none";
     });
 })
 
