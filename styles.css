@@ -29,7 +29,7 @@
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
     height: 500px;
     width: 500px;
-    margin-top: 50px;
+    margin: 50px 0;
     gap: 10px;
     background-color: #dadada;
 }
