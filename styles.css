@@ -41,3 +41,36 @@
     align-items: center;
     font-size: 100px;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: black;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-size: 48px;
+    box-shadow: 8px 8px 12px black;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#restartBtn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #263a3a;;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 48px;
+}
